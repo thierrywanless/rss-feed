@@ -2,11 +2,11 @@ import firebase from "firebase/app";
 import "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
-  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
-  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
-  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
-  appId: process.env.REACT_APP_FIREBASE_APP_ID,
+  apiKey: "AIzaSyAa4N_qFVcS43On2X-YflEzwAudUHrn3QE",
+  authDomain: "rss-feed-30b89.firebaseapp.com",
+  projectId: "rss-feed-30b89",
+  storageBucket: "rss-feed-30b89.appspot.com",
+  appId: "1:35829901191:web:0f120b2a96f55fb0a8d522",
 };
 
 firebase.initializeApp(firebaseConfig);
