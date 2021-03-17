@@ -32,4 +32,12 @@
     font-weight: 700;
     font-style: normal;
   }
+
+  body {
+    @apply text-white;
+  }
+
+  select, option {
+    @apply text-black;
+  }
 }

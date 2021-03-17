@@ -8,7 +8,7 @@ const List = ({ title, url, faviconUrl = null, items }) => {
 
   return (
     <>
-      <div className="my-10 divide-y rounded-xl shadow-lg border">
+      <div className="my-10 divide-y rounded-xl shadow-lg  bg-gray-100 bg-opacity-70">
         <div className="pl-5 py-2 text-lg flex items-center">
           {faviconUrl && (
             <img
@@ -36,7 +36,7 @@ const List = ({ title, url, faviconUrl = null, items }) => {
             items.map((item) => (
               <div
                 key={item.title}
-                className="text-sm py-2 border-b last:border-b-0 hover:bg-gray-100 flex cursor-pointer"
+                className="text-sm py-2 px-2 border-b last:border-b-0 hover:bg-gray-100 hover:bg-opacity-50 flex cursor-pointer"
               >
                 <a
                   className="w-full h-full text-black visited:text-purple-600"
