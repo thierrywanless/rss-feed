@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Masonry from "react-masonry-css";
+import { useLocation, useHistory } from "react-router-dom";
 
 import "./App.css";
 import FeedList from "./components/FeedList";
@@ -8,6 +9,9 @@ import { useQuery } from "react-query";
 import { DB } from "./services/firebase";
 
 function App() {
+  const location = useLocation();
+  const history = useHistory();
+
   const [selectedCategory, setSelectedCategory] = useState("Technology");
 
   const { data } = useQuery(
@@ -30,8 +34,15 @@ function App() {
   };
 
   const changeCategory = (event) => {
+    history.push(`/?category=${event.target.value}`);
     setSelectedCategory(event.target.value);
   };
+
+  useEffect(() => {
+    let params = new URLSearchParams(location.search);
+    const category = params.get("category") ?? "Technology";
+    setSelectedCategory(category);
+  }, [location]);
 
   return (
     <div className="container mx-auto">

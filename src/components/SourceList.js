@@ -25,19 +25,17 @@ const SourceList = ({ source }) => {
 };
 
 SourceList.propTypes = {
-  source: PropTypes.objectOf(
-    PropTypes.shape({
-      title: PropTypes.string,
-      url: PropTypes.string,
-      faviconUrl: PropTypes.string,
-      items: PropTypes.arrayOf(
-        PropTypes.shape({
-          title: PropTypes.string,
-          url: PropTypes.string,
-        })
-      ),
-    })
-  ),
+  source: PropTypes.shape({
+    title: PropTypes.string,
+    url: PropTypes.string,
+    faviconUrl: PropTypes.string,
+    items: PropTypes.arrayOf(
+      PropTypes.shape({
+        title: PropTypes.string,
+        url: PropTypes.string,
+      })
+    ),
+  }),
 };
 
 export default SourceList;

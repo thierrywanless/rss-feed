@@ -59,13 +59,11 @@ const FeedList = ({ source }) => {
 };
 
 FeedList.propTypes = {
-  source: PropTypes.objectOf(
-    PropTypes.shape({
-      title: PropTypes.string,
-      url: PropTypes.string,
-      faviconUrl: PropTypes.string,
-    })
-  ),
+  source: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    url: PropTypes.string.isRequired,
+    faviconUrl: PropTypes.string.isRequired,
+  }),
 };
 
 export default FeedList;
