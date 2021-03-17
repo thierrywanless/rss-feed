@@ -40,7 +40,7 @@ function App() {
   // On location change -> Update category
   useEffect(() => {
     let params = new URLSearchParams(location.search);
-    const category = params.get("category") ?? cookie.category;
+    const category = params.get("category") ?? cookie.category ?? "Technology";
     setCookie("category", category);
   }, [location, setCookie, cookie]);
 
