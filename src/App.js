@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import Masonry from "react-masonry-css";
 import { useLocation, useHistory } from "react-router-dom";
 
@@ -7,13 +7,16 @@ import FeedList from "./components/FeedList";
 import SourceList from "./components/SourceList";
 import { useQuery } from "react-query";
 import { DB } from "./services/firebase";
+import { useCookies } from "react-cookie";
 
 function App() {
   const location = useLocation();
   const history = useHistory();
 
-  const [selectedCategory, setSelectedCategory] = useState("Technology");
+  // Store selected category in a cookie
+  const [cookie, setCookie] = useCookies(["category"]);
 
+  // Get feed/sources
   const { data } = useQuery(
     "sources",
     async () =>
@@ -27,28 +30,31 @@ function App() {
     }
   );
 
+  // New category selected -> Update query and cookie
+  const changeCategory = (event) => {
+    history.push(`/?category=${event.target.value}`);
+    setCookie("category", event.target.value);
+  };
+
+  // On location change -> Update category
+  useEffect(() => {
+    let params = new URLSearchParams(location.search);
+    const category = params.get("category") ?? cookie.category;
+    setCookie("category", category);
+  }, [location, setCookie, cookie]);
+
+  // Masonry column configuration for responsive layouts
   const breakpointColumns = {
     default: 3,
     1000: 2,
     500: 1,
   };
 
-  const changeCategory = (event) => {
-    history.push(`/?category=${event.target.value}`);
-    setSelectedCategory(event.target.value);
-  };
-
-  useEffect(() => {
-    let params = new URLSearchParams(location.search);
-    const category = params.get("category") ?? "Technology";
-    setSelectedCategory(category);
-  }, [location]);
-
   return (
     <div className="container mx-auto">
       {data && (
         <>
-          <h1 className="text-4xl my-5">{selectedCategory}</h1>
+          <h1 className="text-4xl my-5">{cookie.category}</h1>
 
           <select onChange={changeCategory} value={""}>
             <option disabled default value={""}>
@@ -62,25 +68,31 @@ function App() {
           </select>
 
           <div>
-            <Masonry
-              breakpointCols={breakpointColumns}
-              className="flex gap-10"
-              columnClassName="" // Required
-            >
-              {data
-                .find((d) => d.name === selectedCategory)
-                .sources.map((source) => {
-                  // Switch output depending on the type of source provided
-                  switch (source.type) {
-                    case 0:
-                      return <FeedList key={source.url} source={source} />;
-                    case 1:
-                      return <SourceList key={source.url} source={source} />;
-                    default:
-                      return null;
-                  }
-                })}
-            </Masonry>
+            {data.find((d) => d.name === cookie.category) ? (
+              <Masonry
+                breakpointCols={breakpointColumns}
+                className="flex gap-10"
+                columnClassName="" // Required
+              >
+                {data
+                  .find((d) => d.name === cookie.category)
+                  .sources.map((source) => {
+                    // Switch output depending on the type of source provided
+                    switch (source.type) {
+                      case 0:
+                        return <FeedList key={source.url} source={source} />;
+                      case 1:
+                        return <SourceList key={source.url} source={source} />;
+                      default:
+                        return null;
+                    }
+                  })}
+              </Masonry>
+            ) : (
+              <div className="mt-10 text-2xl">
+                Looks like we don't have that category! Try selecting another!
+              </div>
+            )}
           </div>
         </>
       )}

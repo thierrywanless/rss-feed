@@ -6,17 +6,20 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
+import { CookiesProvider } from "react-cookie";
 
 const queryClient = new QueryClient();
 
 ReactDOM.render(
   <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <Router>
-        <App />
-      </Router>
-      <ReactQueryDevtools initialIsOpen={true} />
-    </QueryClientProvider>
+    <CookiesProvider>
+      <QueryClientProvider client={queryClient}>
+        <Router>
+          <App />
+        </Router>
+        <ReactQueryDevtools initialIsOpen={true} />
+      </QueryClientProvider>
+    </CookiesProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );
