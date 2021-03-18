@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Masonry from "react-masonry-css";
 import { useLocation, useHistory } from "react-router-dom";
 import Particles from "react-particles-js";
@@ -16,6 +16,7 @@ function App() {
 
   // Store selected category in a cookie
   const [cookie, setCookie] = useCookies(["category"]);
+  const [subtitle, setSubtitle] = useState(undefined);
 
   // Get feed/sources
   const { data } = useQuery(
@@ -44,6 +45,13 @@ function App() {
     setCookie("category", category);
   }, [location, setCookie, cookie]);
 
+  useEffect(() => {
+    if (data) {
+      const subtitle = data.find((d) => d.name === cookie.category).subtitle;
+      setSubtitle(subtitle);
+    }
+  }, [data, location, setSubtitle, cookie]);
+
   // Masonry column configuration for responsive layouts
   const breakpointColumns = {
     default: 3,
@@ -54,7 +62,8 @@ function App() {
   return (
     <div className="min-h-screen h-full">
       <Particles
-        canvasClassName="absolute top-0 left-0 -z-100 bg-black "
+        className="fixed top-0 left-0 bottom-0 right-0 -z-100 "
+        canvasClassName="bg-black"
         params={{
           particles: {
             number: { value: 100, density: { enable: true, value_area: 800 } },
@@ -100,6 +109,7 @@ function App() {
       {data && (
         <div className="container mx-auto p-5 z-50">
           <h1 className="text-4xl mb-5">{cookie.category}</h1>
+          {subtitle && <h3 className="text-lg mb-5">{subtitle}</h3>}
 
           <select onChange={changeCategory} value={""}>
             <option disabled default value={""}>
@@ -125,9 +135,11 @@ function App() {
                     // Switch output depending on the type of source provided
                     switch (source.type) {
                       case 0:
-                        return <FeedList key={source.url} source={source} />;
+                        return <FeedList key={source.title} source={source} />;
                       case 1:
-                        return <SourceList key={source.url} source={source} />;
+                        return (
+                          <SourceList key={source.title} source={source} />
+                        );
                       default:
                         return null;
                     }
