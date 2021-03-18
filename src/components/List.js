@@ -19,16 +19,24 @@ const List = ({ title, url, faviconUrl = null, items }) => {
               onError={(i) => setShowImage(false)}
             />
           )}
-
-          <a
-            className="font-bold"
-            href={url}
-            target="_blank"
-            rel="noopener noreferrer"
-            dangerouslySetInnerHTML={{
-              __html: he.decode(title),
-            }}
-          />
+          {url ? (
+            <a
+              className="font-bold"
+              href={url}
+              target="_blank"
+              rel="noopener noreferrer"
+              dangerouslySetInnerHTML={{
+                __html: he.decode(title),
+              }}
+            />
+          ) : (
+            <p
+              className="font-bold"
+              dangerouslySetInnerHTML={{
+                __html: he.decode(title),
+              }}
+            />
+          )}
         </div>
 
         <div className="px-5 py-2">
