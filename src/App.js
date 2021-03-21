@@ -38,13 +38,14 @@ function App() {
     setCookie("category", event.target.value);
   };
 
-  // On location change -> Update category
+  // On location change -> update category
   useEffect(() => {
     let params = new URLSearchParams(location.search);
     const category = params.get("category") ?? cookie.category ?? "Technology";
     setCookie("category", category);
   }, [location, setCookie, cookie]);
 
+  // On category change -> update subtitle
   useEffect(() => {
     if (data) {
       const subtitle = data.find((d) => d.name === cookie.category).subtitle;
