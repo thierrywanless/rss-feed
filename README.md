@@ -1,8 +1,11 @@
-# RSS Feed
+# [RSS Feed](https://rss-feed-30b89.firebaseapp.com)
 
 A customisable RSS Feed with dynamic configuration and category based articles.
 
 React app which pulls in data from Firebase, and grabs articles from your favourite RSS sources.
+
+View the demo here: [RSS Feed](https://rss-feed-30b89.firebaseapp.com) \
+Technology is configured with RSS feeds, Japanese is manually added articles.
 
 ## Firebase
 
@@ -28,17 +31,15 @@ This project was configured using the [firebase-tools](https://github.com/fireba
 
 Configuration of GitHub workflows can be found in the `.github/workflows` folder.
 
-
 ## Running Locally
+
 `yarn start` will run the app in development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
-### `yarn build`
-
-`yarn build ` will build the app for production to the `build` folder.
+`yarn build` will build the app for production to the `build` folder.
 The app is then ready for deployment!
 
 ## Create React App
