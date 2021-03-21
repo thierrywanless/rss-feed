@@ -7,6 +7,8 @@ React app which pulls in data from Firebase, and grabs articles from your favour
 View the demo here: [RSS Feed](https://rss-feed-30b89.firebaseapp.com) \
 Technology is configured with RSS feeds, Japanese is manually added articles.
 
+![feed image](.github/images/rss-feed.png)
+
 ## Firebase
 
 This project is setup using firebase:
