@@ -5,7 +5,6 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { QueryClient, QueryClientProvider } from "react-query";
-import { ReactQueryDevtools } from "react-query/devtools";
 import { CookiesProvider } from "react-cookie";
 
 const queryClient = new QueryClient();
@@ -17,7 +16,6 @@ ReactDOM.render(
         <Router>
           <App />
         </Router>
-        <ReactQueryDevtools initialIsOpen={true} />
       </QueryClientProvider>
     </CookiesProvider>
   </React.StrictMode>,
