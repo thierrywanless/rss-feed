@@ -1,8 +1,11 @@
-# RSS Feed
+# [RSS Feed](https://rss-feed-30b89.firebaseapp.com)
 
 A customisable RSS Feed with dynamic configuration and category based articles.
 
 React app which pulls in data from Firebase, and grabs articles from your favourite RSS sources.
+
+View the demo here: [RSS Feed](https://rss-feed-30b89.firebaseapp.com) \
+Technology is configured with RSS feeds, Japanese is manually added articles.
 
 ## Firebase
 
